@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import Home from "./pages/Home";
+import { Helmet } from "react-helmet";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Helmet>
+        <link
+          rel="icon"
+          href="https://png.pngtree.com/png-clipart/20230401/original/pngtree-whatsapp-phone-icon-png-image_9015282.png"
+          type="image/png"
+        />
+      </Helmet>
+      <Home />
     </div>
   );
 }

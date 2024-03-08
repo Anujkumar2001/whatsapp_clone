@@ -1,0 +1,27 @@
+.loadigLine {
+  opacity: 0.4;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.194);
+}
+
+.loadigLine::after {
+  position: absolute;
+  width: 0; /* Adjusted width value */
+  height: 100%; /* Added height property */
+  top: 0;
+  left: 0;
+  content: "";
+  background-color: rgb(5, 121, 32);
+  z-index: 3;
+  animation: widthAnimation 3s ease;
+  border-radius: 10px;
+}
+
+@keyframes widthAnimation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%; /* Adjust this value based on your desired final width */
+  }
+}

@@ -1,0 +1,9 @@
+.chatSection {
+  background-image: url("https://e0.pxfuel.com/wallpapers/421/1013/desktop-wallpaper-text-background-cute-writing.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+::-webkit-scrollbar {
+  width: 10px; /* Set the width of the scrollbar */
+}
