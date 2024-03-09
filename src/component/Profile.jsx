@@ -25,8 +25,22 @@ function Profile({ setProfileBtn, ProfileImg }) {
           <h3 className="text-xl text-green-900">your name</h3>
           <span className="flex  w-full justify-between ">
             <h2 className="text-xl">Anuj sharma</h2>
-            <MdEdit />
+            <MdEdit className="text-xl" />
           </span>
+        </div>
+        <div className="py-3 flex items-center text-start px-6">
+          <p>
+            This is not your username or pin. This name will be visible to your
+            Whatsapp contacts.
+          </p>
+        </div>
+        <div className="flex  justify-between items-end px-6 py-3 bg-white  w-full ">
+          <span className="flex flex-col text-start">
+            {" "}
+            <h2 className="text-xl text-green-700 mb-3">About</h2>
+            <p>Love god,no one else</p>
+          </span>
+          <MdEdit className="text-xl" />
         </div>
       </div>
     </div>

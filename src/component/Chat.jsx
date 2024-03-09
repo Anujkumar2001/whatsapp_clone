@@ -1,23 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsBodyText, BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { FaMicrophone } from "react-icons/fa";
 import { IoMdSend } from "react-icons/io";
 import "../styles/chat.css";
 import { MdDoneAll } from "react-icons/md";
+import { useMyContext } from "../context/ContextProvider";
+import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 function Chat({ chat, chatDetails }) {
+  const { myState, setMyState } = useMyContext();
   const { id, img, name, message, time, userChat } = chatDetails;
+
   const [textChat, setTextChat] = useState("");
   const [sendBtn, setSendBtn] = useState(false);
   const handleSendBnt = () => {
-    chatDetails.userChat.push({ you: textChat });
+    chatDetails.userChat.push({
+      you: textChat,
+      voice: (
+        <audio
+          className="mt-10"
+          src={audioData ? URL.createObjectURL(audioData) : ""}
+          controls
+        ></audio>
+      ),
+    });
     setSendBtn(false);
     setTextChat("");
   };
   const currentTime = new Date();
   const chatTime = currentTime.getHours() + ":" + currentTime.getMinutes();
+  // mic----
+  const [audioData, setAudioData] = useState(null);
+  const recorderControls = useAudioRecorder();
+
+  const addAudioElement = (blob) => {
+    setAudioData(blob);
+  };
   return (
     <>
       {chat ? (
@@ -57,7 +77,7 @@ function Chat({ chat, chatDetails }) {
           </div>
           <div className=" h-screen  pt-16 pb-20 chatSection overflow-y-scroll ">
             <div className="flex min-h-[80vh] flex-col justify-end ">
-              {userChat.map((el) => {
+              {userChat?.map((el) => {
                 return (
                   <div
                     className="w-full  flex px-6"
@@ -109,6 +129,18 @@ function Chat({ chat, chatDetails }) {
                   </div>
                 );
               })}
+              <div className="w-full flex items-end  justify-end px-6">
+                {" "}
+                {audioData ? (
+                  <audio
+                    className="mt-10"
+                    src={audioData ? URL.createObjectURL(audioData) : ""}
+                    controls
+                  ></audio>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           </div>
           <div className="flex text-xl justify-between items-center px-4 absolute z-10 bg-green-100 w-full bottom-0 bg-custom-background">
@@ -141,7 +173,10 @@ function Chat({ chat, chatDetails }) {
                   <IoMdSend className="cursor-pointer" />
                 </button>
               ) : (
-                <FaMicrophone />
+                <AudioRecorder
+                  onRecordingComplete={(blob) => addAudioElement(blob)}
+                  recorderControls={recorderControls}
+                />
               )}
             </form>
           </div>

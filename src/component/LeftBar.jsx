@@ -12,24 +12,26 @@ import Community from "./Community";
 import Status from "./Status";
 import Channel from "./Channel";
 import Profile from "./Profile";
-
+import NewChat from "./NewChat";
+import { useMyContext } from "../context/ContextProvider";
 function WhatsAppMainPage() {
+  const { myState, setMyState } = useMyContext();
   let userDetails = [
     {
       id: 1,
-      img: "https://picsum.photos/seed/picsum/200/300",
+      img: "https://image.shutterstock.com/image-photo/portrait-handsome-caucasian-man-formal-260nw-2142820441.jpg",
       name: "John Doe",
       message: "Hello",
       time: "1:55pm",
       userChat: [
         { user: "How's it going?" },
         { user: "Where are you located?" },
-        { you: "I'm good, thanks!" },
+        { you: "I'm good, thanks!", voice: null },
       ],
     },
     {
       id: 2,
-      img: "https://picsum.photos/seed/picsum/201/300",
+      img: "https://t4.ftcdn.net/jpg/03/26/98/51/360_F_326985142_1aaKcEjMQW6ULp6oI9MYuv8lN9f8sFmj.jpg",
       name: "Alice Smith",
       message: "Hi",
       time: "2:30pm",
@@ -40,7 +42,7 @@ function WhatsAppMainPage() {
     },
     {
       id: 3,
-      img: "https://picsum.photos/seed/picsum/202/300",
+      img: "https://st3.depositphotos.com/10654668/17288/i/450/depositphotos_172880694-stock-photo-mature-man-in-bar.jpg",
       name: "Bob Johnson",
       message: "Greetings",
       time: "3:15pm",
@@ -48,7 +50,7 @@ function WhatsAppMainPage() {
     },
     {
       id: 4,
-      img: "https://picsum.photos/seed/picsum/203/300",
+      img: "https://img.freepik.com/free-photo/stylish-handsome-indian-man-tshirt-pastel-wall_496169-1571.jpg",
       name: "Eva Wilson",
       message: "Hola",
       time: "4:00pm",
@@ -56,7 +58,7 @@ function WhatsAppMainPage() {
     },
     {
       id: 5,
-      img: "https://picsum.photos/seed/picsum/204/300",
+      img: "https://static.vecteezy.com/system/resources/previews/006/917/875/large_2x/portrait-of-a-handsome-indian-man-photo.jpg",
       name: "Michael Brown",
       message: "Hey",
       time: "4:45pm",
@@ -64,7 +66,7 @@ function WhatsAppMainPage() {
     },
     {
       id: 6,
-      img: "https://picsum.photos/seed/picsum/205/300",
+      img: "https://thumbs.dreamstime.com/z/portrait-young-handsome-man-white-shirt-outdoor-portrait-young-handsome-man-white-shirt-outdoor-nice-appearance-131934608.jpg",
       name: "Sophia Miller",
       message: "Greetings",
       time: "5:30pm",
@@ -72,7 +74,7 @@ function WhatsAppMainPage() {
     },
     {
       id: 7,
-      img: "https://picsum.photos/seed/picsum/206/300",
+      img: "https://media.istockphoto.com/id/1347495868/photo/smiling-african-american-man-wearing-glasses.jpg?s=612x612&w=0&k=20&c=QMCbWu-AOfLDkQMsX-qX2xHFZAL56tx_uVucZ5rBxv8=",
       name: "David Davis",
       message: "Hello",
       time: "6:15pm",
@@ -80,7 +82,7 @@ function WhatsAppMainPage() {
     },
     {
       id: 8,
-      img: "https://picsum.photos/seed/picsum/207/300",
+      img: "https://img.freepik.com/free-photo/smiley-man-holding-camera-front-view_23-2149915895.jpg",
       name: "Olivia Garcia",
       message: "Hi",
       time: "7:00pm",
@@ -88,7 +90,7 @@ function WhatsAppMainPage() {
     },
     {
       id: 9,
-      img: "https://picsum.photos/seed/picsum/208/300",
+      img: "https://media.istockphoto.com/id/628330740/photo/portrait-of-a-beautifull-smiling-man.jpg?s=612x612&w=0&k=20&c=t10Nhvv-kzaSEdYpL0-dUvN5_Z9YV58vvDGmwcjZrIk=",
       name: "William Martinez",
       message: "Hola",
       time: "7:45pm",
@@ -96,7 +98,7 @@ function WhatsAppMainPage() {
     },
     {
       id: 10,
-      img: "https://picsum.photos/seed/picsum/209/300",
+      img: "https://media.istockphoto.com/id/628330740/photo/portrait-of-a-beautifull-smiling-man.jpg?s=612x612&w=0&k=20&c=t10Nhvv-kzaSEdYpL0-dUvN5_Z9YV58vvDGmwcjZrIk=",
       name: "Emma Anderson",
       message: "Hey",
       time: "8:30pm",
@@ -119,8 +121,10 @@ function WhatsAppMainPage() {
   const [statusBtn, setStatusBtn] = useState(false);
   const [channelBtn, setChannelBtn] = useState(false);
   const [ProfileBtn, setProfileBtn] = useState(false);
+  const [newChatBtn, setNewChatBtn] = useState(false);
   const handleChatClick = (id, img, name, message, time, userChat) => {
     setChatDetails(id, img, name, message, time, userChat);
+    setMyState("");
     setChat(false);
     setClick(true);
   };
@@ -135,7 +139,7 @@ function WhatsAppMainPage() {
   };
 
   return (
-    <div className="flex bg-green-100 h-[100vh] w-full fixed ">
+    <div className="flex bg-green-100 h-[100vh] w-full fixed  z-0">
       {/* left section start from here--- */}
 
       <div className=" w-4/12 m-w-[400px]  bg-white relative ">
@@ -148,6 +152,7 @@ function WhatsAppMainPage() {
 
         {statusBtn && <Status setStatusBtn={setStatusBtn} />}
         {channelBtn && <Channel setChannelBtn={setChannelBtn} />}
+        {newChatBtn && <NewChat setNewChatBtn={setNewChatBtn} />}
         {ProfileBtn && (
           <Profile
             setProfileBtn={setProfileBtn}
@@ -185,7 +190,12 @@ function WhatsAppMainPage() {
               }}
               className="cursor-pointer"
             />
-            <RiChatNewLine />
+            <RiChatNewLine
+              onClick={() => {
+                setNewChatBtn(true);
+              }}
+              className="cursor-pointer"
+            />
             <BsThreeDotsVertical />
           </span>
         </div>
@@ -243,7 +253,7 @@ function WhatsAppMainPage() {
       </div>
       {/* //left section end here---- */}
       <div className="w-8/12 flex">
-        <Chat chat={chat} chatDetails={chatDetails} />
+        <Chat chat={chat} chatDetails={myState || chatDetails} />
       </div>
     </div>
   );
