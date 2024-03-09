@@ -12,7 +12,7 @@ function Profile({ setProfileBtn, ProfileImg }) {
             onClick={() => setProfileBtn(false)}
             className="cursor-pointer"
           />{" "}
-          <h2>Channels</h2>
+          <h2>Profile</h2>
         </span>
       </div>
       <div className="flex flex-col justify-center items-center gap-4 mt-5">
